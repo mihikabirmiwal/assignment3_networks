@@ -297,7 +297,7 @@ control MyIngress(inout headers hdr,
         /* This action changes an incoming echo request to an echo reply */
 
         /* 1. Set ICMP type and code */
-        /* 2. Set the ttl field of IPV4 header to 64*/
+        /* 2. Set the TTL field of IPV4 header to 64*/
         /* 3. Swap src and dst IP addresses */
         /* 4. Swap src and dst MAC addresses*/
         /* 5. Set egress_spec to the ingress port */
