@@ -434,7 +434,7 @@ def main(p4info_file_path, bmv2_file_path, routing_info, adj_info, part):
                                 #    newRoute using the mergeRoute method. 
                                 # 2. If the method returns True, update the ipv4_route table in the data plane.
                                 # * Use prefix_length of 32 for the match_fields parameter of buildTableEntry
-                                # * Specify is_modify=True as a parameter of WriteTableEntry
+                                # * Specify is_modify=True as the parameter of WriteTableEntry
                                 # 3. If the method returns False, do nothing since there's no update.
                             else:
                                 # PART3_TODO: Route to a new address, add it.

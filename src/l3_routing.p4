@@ -296,10 +296,10 @@ control MyIngress(inout headers hdr,
         /* PART1_TODO: complete action send_ICMP_echo_reply */
         /* This action changes an incoming echo request to an echo reply */
 
-        /* 1. Set ICMP type and code */
-        /* 2. Set the TTL field of IPV4 header to 64*/
+        /* 1. Set ICMP type to ICMP_TYPE_ECHO_REPLY and code to 0 */
+        /* 2. Set the TTL field of IPV4 header to 64 */
         /* 3. Swap src and dst IP addresses */
-        /* 4. Swap src and dst MAC addresses*/
+        /* 4. Swap src and dst MAC addresses */
         /* 5. Set egress_spec to the ingress port */
     }
 
@@ -327,7 +327,9 @@ control MyIngress(inout headers hdr,
            This action changes an incoming ARP request to an ARP reply 
            Argument sndMAC is the MAC address inquired by the request */
         
-        /* 1. Complete an ARP header. Set the opcode to ARP_OP_REPLY.
+        /* 1. Complete an ARP header. ARP header is defined in header arp_t.
+              The packet's arp header can be accessed with hdr.arp.
+              Set the opcode to ARP_OP_REPLY.
               Change the target MAC to the original ARP packet's sender MAC.
               Then swap the sender IP and target IP of the ARP header */
         /* 2. Complete an Ethernet header.  
