@@ -360,12 +360,14 @@ def main(p4info_file_path, bmv2_file_path, routing_info, adj_info, part):
                 elif (op == CONTROLLER_OP_ARP_DEQUEUE): 
                     # Handle ARP reply
                    
-                    # Retrieve ARP information
+                    # Retrieve ARP information from the source fields in the ARP header
+
+                    # Router port number that the response came in
                     egress_port = int.from_bytes(msg.packet.metadata[1].value)
                     pkt = Ether(msg.packet.payload)
-                    next_hop_ip = pkt[ARP].psrc
-                    next_hop_mac = pkt[ARP].hwsrc
-                    egress_mac = pkt[Ether].dst
+                    next_hop_ip = pkt[ARP].psrc # This is src protocol (IP) address
+                    next_hop_mac = pkt[ARP].hwsrc # This is src hw (MAC) address
+                    egress_mac = pkt[Ether].dst # The MAC address of the ingress port
 
                     print ("Receives ARP reply")
                     print ("egress port in int:", egress_port)
@@ -421,10 +423,11 @@ def main(p4info_file_path, bmv2_file_path, routing_info, adj_info, part):
                             newRoute = Route(
                                 nextHopIP=pkt[IP].src,
                                 cost=entry.metric+1
+                                # increment cost by 1 since there is an additional hop 
+                                # between the sender and the router
                             )
                             if (entry.addr in routing_table):
                                 # The address in the RIP response is in the routing table
-                                # Choose the route with less cost
                                 
                                 # PART3_TODO: Try to merge routes and update the routing table on success.
                                 # 1. Merge an existing route (routing_Table[entry.addr]) with 
