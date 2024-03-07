@@ -424,8 +424,8 @@ control MyIngress(inout headers hdr,
         if (hdr.ipv4.ttl == 1) {
             /* PART1_TODO: send ICMP time exceeded message */
             /* 1. Send the ICMP time exceeded msg using action send_ICMP_error */
-            /* 2. Set the source IP address to the IP of the ingress port */
-            /* using table icmp_ingerss_port_ip */
+            /* 2. Set the source IP address to the IP of the ingress port
+                  using table icmp_ingerss_port_ip */
         }
         /* Check whether the packet's destination is router */
         else if (is_router_ip.apply().hit) {
