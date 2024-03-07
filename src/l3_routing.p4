@@ -323,16 +323,16 @@ control MyIngress(inout headers hdr,
     }
 
     action send_ARP_response(macAddr_t sndMAC) {
-        /* PART2_TODO: Complete action send_ARP_response */
-        /* This action changes an incoming ARP request to an ARP reply */
-        /* Argument sndMAC is the MAC address inquired by the request */
+        /* PART2_TODO: Complete action send_ARP_response 
+           This action changes an incoming ARP request to an ARP reply 
+           Argument sndMAC is the MAC address inquired by the request */
         
-        /* 1. Complete an ARP header. Set the opcode to ARP_OP_REPLY. */
-        /* Change the target MAC to the original arp's sender MAC. */
-        /* Then swap the sender IP and target IP of the ARP header */
-        /* 2. Complete an Ethernet header. */ 
-        /* Change the dst MAC to the original packet's src MAC */
-        /* Then set the src MAC to sndMAC */
+        /* 1. Complete an ARP header. Set the opcode to ARP_OP_REPLY.
+              Change the target MAC to the original ARP packet's sender MAC.
+              Then swap the sender IP and target IP of the ARP header */
+        /* 2. Complete an Ethernet header.  
+              Change the dest MAC to the original packet's src MAC 
+              Then set the src MAC to sndMAC */
         /* 3. Set egress_spec to the ingress_port */
     }
     
