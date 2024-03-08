@@ -436,12 +436,14 @@ def main(p4info_file_path, bmv2_file_path, routing_info, adj_info, part):
                                 # * Use prefix_length of 32 for the match_fields parameter of buildTableEntry
                                 # * Specify is_modify=True as the parameter of WriteTableEntry
                                 # 3. If the method returns False, do nothing since there's no update.
+                                pass
                             else:
                                 # PART3_TODO: Route to a new address, add it.
                                 # 1. Add it to the routing_table dictionary using 
                                 # entry.addr as a key and new Route as a value.
                                 # 2. Insert a table entry to the ipv4_route table in the data plane. 
                                 # * Use prefix_length of 32 for the match_fields parameter of buildTableEntry
+                                pass
                                 
                         dump_routing_table()
 
