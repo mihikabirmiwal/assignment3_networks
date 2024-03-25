@@ -293,7 +293,7 @@ control MyIngress(inout headers hdr,
     }
 
     action send_ICMP_echo_reply() {
-        /* PART1_TODO: complete action send_ICMP_echo_reply */
+        /* PART1_TODONE: complete action send_ICMP_echo_reply */
         /* This action changes an incoming echo request to an echo reply */
 
         /* 1. Set ICMP type to ICMP_TYPE_ECHO_REPLY and code to 0 */
@@ -443,7 +443,7 @@ control MyIngress(inout headers hdr,
         }
         /* Check whether the packet's destination is router */
         else if (is_router_ip.apply().hit) {
-            /* PART1_TODO: handle the packet of which destination is the router */
+            /* PART1_TODONE: handle the packet of which destination is the router */
             /* 1. If the packet is an ICMP echo packet, send an ICMP echo reply */
             /* using action send_ICMP_echo_reply (you should complete the action) */
             /* 2. Else if the packet is TCP or UDP packet, */
