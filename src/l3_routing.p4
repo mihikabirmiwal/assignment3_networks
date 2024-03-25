@@ -297,10 +297,20 @@ control MyIngress(inout headers hdr,
         /* This action changes an incoming echo request to an echo reply */
 
         /* 1. Set ICMP type to ICMP_TYPE_ECHO_REPLY and code to 0 */
+        hdr.icmp.type = ICMP_TYPE_ECHO_REPLY;
+        hdr.icmp.code = 0;
         /* 2. Set the TTL field of IPV4 header to 64 */
+        hdr.ipv4.ttl = 64;
         /* 3. Swap src and dst IP addresses */
+        ipAddr_t ogSourceIp = hdr.ipv4.srcAddr;
+        hdr.ipv4.srcAddr = hdr.ipv4.dstAddr;
+        hdr.ipv4.dstAddr = ogSourceIp;
         /* 4. Swap src and dst MAC addresses */
+        macAddr_t ogSourceMac = hdr.ethernet.srcAddr;
+        hdr.ethernet.srcAddr = hdr.ethernet.dstAddr;
+        hdr.ethernet.dstAddr = ogSourceMac;
         /* 5. Set egress_spec to the ingress port */
+        standard_metadata.egress_spec = standard_metadata.ingress_port;
     }
 
     action forward_to_next_hop(ipAddr_t next_hop){
@@ -424,10 +434,12 @@ control MyIngress(inout headers hdr,
     apply {
         /* Check if TTL expires */
         if (hdr.ipv4.ttl == 1) {
-            /* PART1_TODO: send ICMP time exceeded message */
+            /* PART1_TODONE: send ICMP time exceeded message */
             /* 1. Send the ICMP time exceeded msg using action send_ICMP_error */
             /* 2. Set the source IP address to the IP of the ingress port
                   using table icmp_ingerss_port_ip */
+            send_ICMP_error(ICMP_TYPE_TIME_EXCEEDED, 0);
+            icmp_ingress_port_ip.apply();
         }
         /* Check whether the packet's destination is router */
         else if (is_router_ip.apply().hit) {
@@ -437,6 +449,11 @@ control MyIngress(inout headers hdr,
             /* 2. Else if the packet is TCP or UDP packet, */
             /* send an ICMP port unreachable msg using action send_ICMP_error */  
             /* 3. Otherwise, drop the packet */
+            if (hdr.ipv4.proto==IPV4_ICMP) {
+                send_ICMP_echo_reply();
+            } else if(hdr.ipv4.proto==IPV4_TCP || hdr.ipv4.proto==IPV4_UDP) {
+                send_ICMP_error(ICMP_TYPE_DEST_UNREACAHBLE, ICMP_CODE_PORT_UNREACHABLE);
+            }
         }
         /* Check if the packet is an ARP packet*/
         else if (hdr.arp.isValid()) {
