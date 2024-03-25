@@ -43,11 +43,15 @@ class Route():
         self.cost = cost
 
     def mergeRoute(self, newRoute:Route) -> bool:
-        # Part3_TODO: Complete the Route.mergeRoute method
+        # Part3_TODONE: Complete the Route.mergeRoute method
         # This method compares the cost of self to that of newRoute.
         # If the newRoute's cost is smaller, update the self's attributes 
         # to those of newRoute and return True.
         # Otherwise, return False
+        if newRoute.cost < self.cost:
+            self.nextHopIP = newRoute.nextHopIP
+            self.cost = newRoute.cost
+            return True
         return False
         
 def dump_routing_table():
