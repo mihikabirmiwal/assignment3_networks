@@ -461,7 +461,7 @@ control MyIngress(inout headers hdr,
             if (hdr.ipv4.proto==IPV4_ICMP) {
                 send_ICMP_echo_reply();
             } else if(hdr.ipv4.proto==IPV4_TCP || hdr.ipv4.proto==IPV4_UDP) {
-                send_ICMP_error(ICMP_TYPE_DEST_UNREACAHBLE, ICMP_CODE_PORT_UNREACHABLE);
+                send_ICMP_error(ICMP_TYPE_DEST_UNREACHABLE, ICMP_CODE_PORT_UNREACHABLE);
             }
         }
         /* Check if the packet is an ARP packet*/
