@@ -456,7 +456,7 @@ def main(p4info_file_path, bmv2_file_path, routing_info, adj_info, part):
                                 # PART3_TODONE: Try to merge routes and update the routing table on success.
                                 # 1. Merge an existing route (routing_Table[entry.addr]) with 
                                 #    newRoute using the mergeRoute method. 
-                                existing_route = routing_Table[entry.addr]
+                                existing_route = routing_table[entry.addr]
                                 lessThan = existing_route.mergeRoute(newRoute)
                                 # 2. If the method returns True, update the ipv4_route table in the data plane.
                                 # * Use prefix_length of 32 for the match_fields parameter of buildTableEntry
