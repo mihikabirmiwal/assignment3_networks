@@ -396,6 +396,9 @@ def main(p4info_file_path, bmv2_file_path, routing_info, adj_info, part):
                     )
                     s1.WriteTableEntry(dmac_table_entry)  
 
+                    print("egress_mac ", str(egress_mac))
+                    print("next_hop_mac ", str(next_hop_mac))
+
                         
                     # Dequeue packets waiting for the ARP reply
                     next_hop_int = int(ipaddress.ip_address(next_hop_ip))
