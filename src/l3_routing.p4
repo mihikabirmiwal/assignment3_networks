@@ -344,7 +344,7 @@ control MyIngress(inout headers hdr,
               Then swap the sender IP and target IP of the ARP header */
 
                 hdr.arp.op = ARP_OP_REPLY;
-                hdr.arp.tgtMAC = hdr.arp.sndMAC
+                hdr.arp.tgtMAC = hdr.arp.sndMAC;
                 ipAddr_t temp = hdr.arp.sndIP;
                 hdr.arp.sndIP = hdr.arp.tgtIP;
                 hdr.arp.tgtIP = temp;
