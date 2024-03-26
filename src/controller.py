@@ -383,7 +383,7 @@ def main(p4info_file_path, bmv2_file_path, routing_info, adj_info, part):
                         table_name="MyIngress.arp_table",
                         match_fields={"meta.next_hop": next_hop_ip},
                         action_name="MyIngress.change_dst_mac",
-                        action_params={"dst_mac": egress_mac}
+                        action_params={"dst_mac": next_hop_mac}
                     )
                     s1.WriteTableEntry(arp_table_entry) 
 
