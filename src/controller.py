@@ -381,7 +381,7 @@ def main(p4info_file_path, bmv2_file_path, routing_info, adj_info, part):
                     ### Use p4info_helper.buildTableEntry and s1.WriteTableEntry as in A2
                     arp_table_entry = p4info_helper.buildTableEntry(
                         table_name="MyIngress.arp_table",
-                        match_fields={"meta.next_hop": next_hop_mac},
+                        match_fields={"meta.next_hop": next_hop_ip},
                         action_name="MyIngress.change_dst_mac",
                         action_params={"dst_mac": egress_mac}
                     )
